@@ -1,0 +1,22 @@
+# Dependencias y builds
+node_modules/
+dist/
+*.log
+
+# Secretos: NUNCA subir credenciales. Los .env.example sí se versionan.
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+
+# Editor y sistema
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Archivos sueltos del entorno local
+bebuild.log
+opencode/

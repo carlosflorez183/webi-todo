@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+@theme {
+  /* Azules oscuros (base) */
+  --color-background: #0B1220;
+  --color-surface: #131C2E;
+  --color-surface-2: #1B2A45;
+  --color-border: #243352;
+
+  /* Mango verde (acento / signature) */
+  --color-primary: #84CC16;
+  --color-primary-hover: #65A30D;
+  --color-primary-bright: #A3E635;
+
+  /* Blancos */
+  --color-content: #F8FAFC;
+  --color-muted: #94A3B8;
+
+  /* Estados */
+  --color-success: #4ADE80;
+  --color-danger: #F87171;
+
+  /* Columnas del tablero (color diferencial por estado) */
+  --color-todo: #60A5FA;        /* azul */
+  --color-progress: #FBBF24;    /* ámbar */
+  --color-done: #4ADE80;        /* verde (success) */
+
+  /* Sombra de tarjeta sobre superficies oscuras */
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.35), 0 4px 12px rgb(0 0 0 / 0.25);
+
+  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-background);
+    color: var(--color-content);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+}

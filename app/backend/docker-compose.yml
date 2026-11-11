@@ -1,0 +1,29 @@
+# Servicio MongoDB para desarrollo local, con autenticación.
+# Las credenciales se leen de backend/.env (ver .env.example).
+# Uso (desde app/backend):
+#   npm run db:up      -> levanta MongoDB en segundo plano
+#   npm run db:logs    -> muestra los logs
+#   npm run db:down    -> detiene el contenedor (conserva los datos)
+#   npm run db:reset   -> detiene y BORRA los datos (y el usuario de app se recrea al subir)
+
+services:
+  mongo:
+    image: mongo:7
+    container_name: webi-mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME:?Define MONGO_ROOT_USERNAME en backend/.env}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD:?Define MONGO_ROOT_PASSWORD en backend/.env}
+      MONGO_INITDB_DATABASE: ${MONGO_DATABASE:-webi-todo}
+      # Usuario de aplicación: lo crea mongo-init/01-create-app-user.js al inicializar el volumen.
+      MONGO_DATABASE: ${MONGO_DATABASE:-webi-todo}
+      MONGO_APP_USERNAME: webi_app
+      MONGO_APP_PASSWORD: ${MONGO_APP_PASSWORD:?Define MONGO_APP_PASSWORD en backend/.env}
+    ports:
+      - "27017:27017"
+    volumes:
+      - webi-mongo-data:/data/db
+      - ./mongo-init:/docker-entrypoint-initdb.d:ro
+    restart: unless-stopped
+
+volumes:
+  webi-mongo-data:
